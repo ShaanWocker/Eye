@@ -1,0 +1,275 @@
+body {
+  margin: 10px;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+  background-color: #ff0000;
+  align-items: center;
+}
+
+header {
+  background-color: #000000;
+  box-shadow: 13px 13px 15px rgb(241 91 91);
+  padding: 10 10px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+video {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h2 {
+  color: #fff;
+  font-size: 24px;
+  margin: 10px 0;
+}
+
+nav div {
+  color: #fff;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+main {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+h2 {
+  color: #ffffff;
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.action-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.button-container {
+  margin-top: 20px;
+}
+
+.button-container a {
+  display: inline-block;
+  padding: 15px 40px;
+  font-size: 18px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #1e6f5c;
+  border-radius: 30px;
+  transition: background-color 0.3s ease;
+  border: none;
+  outline: none;
+}
+
+.button-container a:hover {
+  background-color: #196347;
+}
+
+@media (min-width: 768px) {
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+  }
+
+  .container {
+    flex-direction: row;
+  }
+
+  img {
+    max-width: 200px;
+    height: auto;
+    margin-right: 20px;
+  }
+
+  h2 {
+    font-size: 36px;
+  }
+
+  nav div {
+    font-size: 24px;
+  }
+
+  main {
+    padding: 60px 20px;
+  }
+
+  h2 {
+    font-size: 36px;
+    margin-bottom: 50px;
+  }
+
+  .action-container {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .button-container {
+    margin: 0 10px;
+  }
+
+  .button-container a {
+    padding: 20px 50px;
+    font-size: 24px;
+  }
+
+  
+}
+
+--- VideoChat ---
+
+.video_chat_main_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f2f2f2;
+  padding: 10px;
+}
+
+.video_chat_container {
+  align-items: center; /* Center the container horizontally */
+  background-color: #000000;
+  box-shadow: 13px 13px 15px rgb(241 91 91);
+  width: 100%;
+  padding: 10 10px;
+}
+
+.video_tag_container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.videos {
+  padding: 10px;
+  display: flex;
+  justify-content: center; /* Center the videos horizontally */
+}
+
+.video_player {
+  width: 100%;
+  height: auto;
+  margin-right: 10px;
+}
+
+.chat_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the container horizontally */
+  padding: 10px;
+  border: 1px solid #dddddd94;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+
+.chat_text_container {
+  margin-bottom: 10px;
+}
+
+.chat_text_container p {
+  margin-bottom: 5px;
+}
+
+.horizontal-divider {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-top: 1px solid #dddddd;
+}
+
+.next_chat_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the buttons and input horizontally */
+  margin-top: 10px;
+}
+
+.next_chat {
+  padding: 20px 40px;
+  background-color: #1e6f5c;
+  color: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 10px; /* Add margin bottom for spacing between buttons and input */
+}
+
+.type_message textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  resize: vertical;
+  margin-top: 10px;
+}
+
+.msg_send_button {
+  width: 50px;
+  height: 50px;
+  background-color: #1e6f5c;
+  border-radius: 50%;
+  margin-left: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+.send_button {
+  width: 20px;
+  height: auto;
+  background: transparent;
+}
+
+.msg_send_button:hover {
+  background: transparent;
+}
+
+/* Media queries for mobile screens */
+@media screen and (max-width: 768px) {
+  .video_chat_container {
+    margin-bottom: 0;
+  }
+
+  .next_chat_container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .next_chat {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .type_message textarea {
+    margin-top: 0;
+  }
+
+  .video_chat_main_container {
+    overflow-y: visible;
+  }
+}
