@@ -4,10 +4,14 @@ let remoteUser;
 let remoteStream;
 let url = new URL(window.location.href);
 let peerConnection;
+let sendChannel;
+let receiveChannel;
 
+var msgInput = document.querySelector("#msg_input");
+var msgSendBtn = document.querySelector(".msg_send_button");
+var chatTextArea = document.querySelector(".chat_text_area");
 
 username = url.searchParams.get('username');
-
 remoteUser = url.searchParams.get('remoteuser');
 
 let init = async () => {
@@ -48,14 +52,7 @@ let createPeerConnection = async () => {
 
   remoteStream = new MediaStream();
 
-  // remoteStream = new navigator.mediaDevices.getUserMedia({
-  //   video: true,
-  //   audio: true
-  // });
-
   document.getElementById("user-2").srcObject = remoteStream;
-
-  // await 
   
   localStream.getTracks().forEach((track) => {
     peerConnection.addTrack(track, localStream)
@@ -87,7 +84,64 @@ let createPeerConnection = async () => {
     }
   };
 
+  sendChannel = peerConnection.createDataChannel("Send data channel");
+  sendChannel.onopen = () => {
+    console.log("Data channel is now open and ready to use.");
+    onSendChannelStateChange();
+  }
+
+  peerConnection.ondatachannel = receiveChannelCallback;
+  // sendChannel.onmessage = onSendChannelMessageCallback;
+
+
+
 };
+
+function sendData(){
+  const msgData = msgInput.value;
+  
+  chatTextArea.innerHTML += "<div style='margin-top: 2px; margin-bottom: 2px;'><b>Me: </b>" +msgData+"</div>";
+  
+  if(sendChannel){
+    onSendChannelStateChange();
+    sendChannel.send(msgData);
+  } else {
+    receiveChannel.send(msgData);
+  }
+}
+
+function receiveChannelCallback(event){
+  console.log("Receive channel callback");
+  receiveChannel = event.channel;
+  receiveChannel.onmesssage = onReceiveChannelMessageCallBack;
+  receiveChannel.onopen = onReceiveChannelStateChange;
+  receiveChannel.onclose = onReceiveChannelStateChange;
+}
+
+function onReceiveChannelMessageCallBack(event){
+  console.log("Receive message");
+  chatTextArea.innerHTML = "<div style='margin-top: 2px; margin-bottom: 2px;'><b>Stranger: </b>" +event.data+"</div>";
+}
+
+function onReceiveChannelStateChange(){
+  const readyState = receiveChannel.readyState;
+  console.log("Receive channel state is :" + readyState);
+  if(readyState === "open") {
+    console.log("Data channel ready state is open - onReceiveChannelStateChange");
+  } else {
+    console.log("Data channel ready state is closed - onReceiveChannelStateChange");
+  }
+}
+
+function onSendChannelStateChange(){
+  const readyState = sendChannel.readyState;
+  console.log("Send channel state is :" + readyState);
+  if(readyState === "open") {
+    console.log("Data channel ready state is open - onSendChannelStateChange");
+  } else {
+    console.log("Data channel ready state is closed - onSendChannelStateChange");
+  }
+}
 
 let createOffer = async () => {
   createPeerConnection();
@@ -137,3 +191,6 @@ socket.on("Candidate receiver", function(data){
   peerConnection.addIceCandidate(data.iceCandidateData);
 });
 
+msgSendBtn.addEventListener("click", function(event) {
+  sendData();
+});

@@ -4,6 +4,7 @@ body {
   font-family: Arial, sans-serif;
   background-color: #ff0000;
   align-items: center;
+  overflow:scroll;
 }
 
 header {
@@ -170,7 +171,7 @@ h2 {
 .video_player {
   width: 100%;
   height: auto;
-  margin-right: 10px;
+  margin: 10px;
 }
 
 .chat_container {
@@ -189,7 +190,9 @@ h2 {
 
 .chat_text_container p {
   margin-bottom: 5px;
+  color: rgb(255, 255, 255);
 }
+
 
 .horizontal-divider {
   margin-top: 10px;
@@ -221,7 +224,9 @@ h2 {
   border-radius: 4px;
   resize: vertical;
   margin-top: 10px;
+  height: 220px; /* Adjust the height value as per your preference */
 }
+
 
 .msg_send_button {
   width: 50px;
