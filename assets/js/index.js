@@ -15,7 +15,7 @@ username = url.searchParams.get('username');
 remoteUser = url.searchParams.get('remoteuser');
 
 var eyeID = localStorage.getItem('eyeID');
-if(eyeID){
+if (eyeID) {
   username = eyeID;
 
   $.ajax({
@@ -27,8 +27,8 @@ if(eyeID){
   });
 
 } else {
-  var postData = {data: "Demo data"};
-  
+  var postData = { data: "Demo data" };
+
   $.ajax({
     url: "/api/users",
     type: "POST",
@@ -36,7 +36,9 @@ if(eyeID){
     success: function (response) {
       console.log(response);
       localStorage.setItem("eyeID", response);
-      username = response;
+      eyeID = response; // Update the eyeID value after retrieving it from the server
+      username = eyeID;
+      init(); // Call the init function after retrieving the eyeID
     },
     error: function (error) {
       console.log(error);
@@ -52,20 +54,24 @@ let init = async () => {
 
   document.getElementById('user-1').srcObject = localStream;
 
-  $.post("http://localhost:3000/get_remote_users", { eyeID: eyeID})
-    .done(function (data) {
-      if(data[0]){
-        if(data[0]._id == remoteUser || data[0]._id == username){
+  $.ajax({
+    url: "/get_remote_users",
+    type: "POST",
+    data: { eyeID: eyeID }, // Pass the eyeID in the request body
+    success: function (data) {
+      if (data[0]) {
+        if (data[0]._id == remoteUser || data[0]._id == username) {
 
-        }else{
+        } else {
           remoteUser = data[0]._id;
         }
       }
       createOffer();
-    })
-    .fail(function (xhr, textStatus, errorThrown){
+    },
+    error: function (xhr, textStatus, errorThrown) {
       console.log(xhr.responseText);
-    });
+    }
+  });
 };
 
 init();
