@@ -201,7 +201,7 @@ function onSendChannelStateChange(){
 }
 
 function fetchNextUser(remoteUser){
-  $.post("http://localhost:3000/get_next_user", {eyeID: eyeID, remoteUser: remoteUser}, function(data){
+  $.post("https://beautiful-scone-70039e.netlify.app/get_next_user", {eyeID: eyeID, remoteUser: remoteUser}, function(data){
     console.log("Next user ID is :" + data);
 
     if(data[0]){
