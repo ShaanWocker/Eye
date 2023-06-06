@@ -185,7 +185,9 @@ h2 {
 }
 
 .chat_text_container {
-  margin-bottom: 10px;
+  margin: auto;
+  display: grid;
+  padding: inherit;
 }
 
 .chat_text_container p {
